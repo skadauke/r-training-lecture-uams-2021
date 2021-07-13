@@ -25,23 +25,23 @@ docker run --privileged -it \
 ### Deploy to AWS
 
 - Registered `r-training.cloud` using AWS Route 53 (Personal AWS)
-- Created public `t2.micro` instance for testing running Ubuntu 20.04 LTS
-  - For the real thing, will create public `c5a.2xlarge` instance (CHOP AWS), $0.31/hr
+- Created public `c5a.2xlarge` instance (CHOP AWS, $0.31/hr)
 - Configured A record sending `uams.r-training.cloud` to the public IP of the instance (Personal AWS)
 
 ```bash
-ssh -i ~/.ssh/cgt.pem ubuntu@uams.r-training.cloud
+ssh ubuntu@uams.r-training.cloud
 ```
 
 ```bash
-sudo apt update &&
+sudo apt -y update &&
+sudo apt -y upgrade &&
 
 sudo ufw allow OpenSSH &&
-sudo ufw enable
+yes | sudo ufw enable
 ```
 
 ```bash
-sudo apt install nginx &&
+sudo apt -y install nginx &&
 sudo ufw allow 'Nginx Full' &&
 sudo systemctl start nginx &&
 sudo systemctl enable nginx
@@ -53,12 +53,12 @@ MY_DOMAIN=uams.r-training.cloud &&
 sudo snap install --classic certbot &&
 sudo ln -s /snap/bin/certbot /usr/bin/certbot &&
 
-sudo certbot --nginx -d $MY_DOMAIN
+sudo certbot --nginx -d $MY_DOMAIN --non-interactive --agree-tos -m webmaster@$MY_DOMAIN
 ```
 
 ```
 sudo apt update &&
-sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release &&
+sudo apt -y install apt-transport-https ca-certificates curl gnupg lsb-release &&
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg &&
 
@@ -67,10 +67,10 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null &&
 
 sudo apt update &&
-sudo apt install docker-ce docker-ce-cli containerd.io
+sudo apt -y install docker-ce docker-ce-cli containerd.io
 ```
 
-```
+```bash
 # Replace with valid license
 export RSP_LICENSE=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX &&
 
