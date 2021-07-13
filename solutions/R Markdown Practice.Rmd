@@ -1,0 +1,22 @@
+---
+title: R Markdown Practice
+---
+
+## This is a level 2 header
+
+### And this is a level 3 header
+
+It it easy to add plain text in R Markdown. You can also add styling:
+
+- This text is **bold**
+- This text is *italic*
+
+Place empty lines between paragraphs of text.
+
+Here's a link to [Google](https://www.google.com). Click to make sure it works!
+
+Here is a code chunk:
+
+```{r}
+plot(fdeaths)
+```
