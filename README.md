@@ -1,6 +1,6 @@
 # Breaking Up with Excel - How to Write Reproducible Reports with R Markdown
 
-This repository contains materials for a virtual lecture held for the UAMS Pathology Department on 07/14/2021. The slides for the presentation are available [here](slides/20210714%20UAMS%20lecture.pptx).
+This repository contains materials for a virtual lecture held for the UAMS Pathology Department on 07/14/2021. The slides for the presentation are available [here](slides/20210714%20UAMS%20lecture.pptx?raw=true).
 
 ## About the instructor
 

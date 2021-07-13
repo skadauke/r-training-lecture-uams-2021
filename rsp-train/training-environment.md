@@ -95,3 +95,46 @@ sudo docker run --privileged -it \
     -v "$PWD/rsp-train/custom-login/":/etc/rstudio \
     skadauke/rsp-train
 ```
+
+Detach the container by pressing **Ctrl+A**.
+
+Inside the `/etc/nginx/sites-available/default` file, replace the following lines:
+
+```
+location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ =404;
+}
+```
+
+With the following:
+
+```
+location / {
+    proxy_pass http://localhost:8787;
+    proxy_redirect http://localhost:8787/ $scheme://$http_host/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_read_timeout 20d;
+}
+```
+
+Add the following lines right after `http {` in `/etc/nginx/nginx.conf`:
+
+```
+        map $http_upgrade $connection_upgrade {
+            default upgrade;
+            ''      close;
+        }
+
+        server_names_hash_bucket_size 64;
+```
+
+Test the configuration and restart Nginx:
+
+```bash
+sudo nginx -t
+sudo systemctl restart nginx
+```
