@@ -76,6 +76,8 @@ export RSP_LICENSE=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX &&
 
 GH_REPO=https://github.com/skadauke/r-training-lecture-uams-2021 &&
 
+sudo rm -rf r-training-lecture-uams-2021 &&
+
 git clone $GH_REPO &&
 
 cd r-training-lecture-uams-2021 &&
